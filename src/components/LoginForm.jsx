@@ -17,7 +17,7 @@ function LoginForm() {
   const [remember, setRemember] = useState(false);
 
   const validateEmail = (email) => {
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailRegex = /^(.+)@(.+)$/;
     return emailRegex.test(email);
   };
 
@@ -96,7 +96,7 @@ function LoginForm() {
             checked={remember}
             onChange={(e) => setRemember(e.target.checked)}
           />
-          Remember me
+          Remember me{' '}
         </label>
         <a href="#">Forgot password?</a>
       </fieldset>
