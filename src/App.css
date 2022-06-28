@@ -94,3 +94,7 @@ label {
   top: 12px;
   right: 12px
 }
+
+input {
+  accent-color: #181725;
+}
