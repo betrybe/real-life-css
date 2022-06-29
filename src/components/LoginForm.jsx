@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import './LoginForm.css'
+import React, { useState } from 'react';
+import './LoginForm.css';
 
 function LoginForm() {
   const [email, setEmail] = useState({
@@ -27,7 +27,7 @@ function LoginForm() {
       return false;
     }
     return true;
-  }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -59,53 +59,58 @@ function LoginForm() {
   };
 
   return (
-    <form>
-      <h1>Sign In</h1>
-      <fieldset>
-        <input
-          type="email"
-          name='email'
-          placeholder="Login"
-          value={email.value}
-          onChange={handleChange}
-        />
-        <br />
-        {email.wasTouched && email.hasError && <small>{email.error}</small>}
-      </fieldset>
-      <fieldset>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Password"
-          value={password.value}
-          name='password'
-          onChange={handleChange}
-        />
-        <input
-          type="checkbox"
-          checked={showPassword}
-          onChange={() => setShowPassword(!showPassword)}
-        />
-        <br />
-        {password.wasTouched && password.hasError && <small>{password.error}</small>}
-      </fieldset>
-      <fieldset>
-        <label htmlFor="remember">
+    <main>
+      <form>
+        <h1>Sign In</h1>
+        <fieldset>
           <input
-            type="checkbox"
-            name="remember"
-            id="remember"
-            checked={remember}
-            onChange={(e) => setRemember(e.target.checked)}
+            type="email"
+            name="email"
+            placeholder="Login"
+            value={email.value}
+            onChange={handleChange}
           />
-          Remember me{' '}
-        </label>
-        <a href="#">Forgot password?</a>
-      </fieldset>
-      <button type="button" onClick={handleSubmit}>
-        Login
-      </button>
-    </form>
-  )
+          <br />
+          {email.wasTouched && email.hasError && <small>{email.error}</small>}
+        </fieldset>
+        <fieldset className='password-wrapper'>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Password"
+            value={password.value}
+            name="password"
+            onChange={handleChange}
+          />
+          <input
+            className='show-password-input'
+            type="checkbox"
+            checked={showPassword}
+            onChange={() => setShowPassword(!showPassword)}
+          />
+          <br />
+          {password.wasTouched && password.hasError && (
+            <small>{password.error}</small>
+          )}
+        </fieldset>
+        <fieldset className='remember-wrapper'>
+          <label htmlFor="remember" className='remember-input'>
+            <input
+              type="checkbox"
+              name="remember"
+              id="remember"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+            />
+            Remember me{' '}
+          </label>
+          <a href="#">Forgot password?</a>
+        </fieldset>
+        <button type="button" onClick={handleSubmit}>
+          Login
+        </button>
+      </form>
+    </main>
+  );
 }
 
-export default LoginForm
+export default LoginForm;
