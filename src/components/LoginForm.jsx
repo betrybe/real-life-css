@@ -1,15 +1,32 @@
-import React, { useState } from 'react'
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import {
+  Button,
+  Checkbox,
+  FormControlLabel,
+  FormGroup,
+  IconButton,
+  Link,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
+import {
+  CustomBox,
+  CustomForm,
+  CustomPaper,
+  CustomStack,
+  CustomTextField,
+} from "../styles/LoginForm";
 
 function LoginForm() {
   const [email, setEmail] = useState({
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     hasError: true,
     wasTouched: false,
   });
   const [password, setPassword] = useState({
-    value: '',
-    error: '',
+    value: "",
+    error: "",
     hasError: true,
     wasTouched: false,
   });
@@ -26,23 +43,23 @@ function LoginForm() {
       return false;
     }
     return true;
-  }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === 'email') {
+    if (name === "email") {
       const isEmailValid = validateEmail(value);
       setEmail({
         value,
-        error: !isEmailValid ? 'Enter a valid email' : '',
+        error: !isEmailValid ? "Enter a valid email" : "",
         hasError: !isEmailValid,
         wasTouched: true,
       });
-    } else if (name === 'password') {
+    } else if (name === "password") {
       const isPasswordValid = validatePassword(value);
       setPassword({
         value,
-        error: !isPasswordValid ? 'Password must be at least 6 characters' : '',
+        error: !isPasswordValid ? "Password must be at least 6 characters" : "",
         hasError: !isPasswordValid,
         wasTouched: true,
       });
@@ -51,60 +68,80 @@ function LoginForm() {
 
   const handleSubmit = () => {
     if (email.hasError || password.hasError) {
-      alert('Please fix the errors');
+      alert("Please fix the errors");
     } else {
-      alert('Login successful');
+      alert("Login successful");
     }
   };
 
   return (
-    <form>
-      <h1>Sign In</h1>
-      <fieldset>
-        <input
-          type="email"
-          name='email'
-          placeholder="Login"
-          value={email.value}
-          onChange={handleChange}
-        />
-        <br />
-        {email.wasTouched && email.hasError && <small>{email.error}</small>}
-      </fieldset>
-      <fieldset>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Password"
-          value={password.value}
-          name='password'
-          onChange={handleChange}
-        />
-        <input
-          type="checkbox"
-          checked={showPassword}
-          onChange={() => setShowPassword(!showPassword)}
-        />
-        <br />
-        {password.wasTouched && password.hasError && <small>{password.error}</small>}
-      </fieldset>
-      <fieldset>
-        <label htmlFor="remember">
-          <input
-            type="checkbox"
-            name="remember"
-            id="remember"
-            checked={remember}
-            onChange={(e) => setRemember(e.target.checked)}
+    <CustomForm>
+      <CustomPaper elevation={3}>
+        <CustomStack spacing={3}>
+          <Typography variant="h1" component="div" gutterBottom>
+            Sign In
+          </Typography>
+          <CustomTextField
+            type="email"
+            name="email"
+            label="Login"
+            variant="outlined"
+            fullWidth
+            value={email.value}
+            onChange={handleChange}
+            helperText={email.wasTouched && email.hasError && email.error}
+            error={email.wasTouched && email.hasError}
           />
-          Remember me{' '}
-        </label>
-        <a href="#">Forgot password?</a>
-      </fieldset>
-      <button type="button" onClick={handleSubmit}>
-        Login
-      </button>
-    </form>
-  )
+          <CustomTextField
+            type={showPassword ? "text" : "password"}
+            label="Password"
+            value={password.value}
+            name="password"
+            onChange={handleChange}
+            variant="outlined"
+            fullWidth
+            helperText={
+              password.wasTouched && password.hasError && password.error
+            }
+            error={password.wasTouched && password.hasError}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={() => setShowPassword(!showPassword)}
+                  edge="end"
+                  color="primary"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              ),
+            }}
+          />
+          <CustomBox>
+            <FormGroup>
+              <FormControlLabel
+                id="remember"
+                name="remember"
+                onChange={(e) => setRemember(e.target.checked)}
+                control={<Checkbox color="default" checked={remember} />}
+                label="Remember me"
+              />
+            </FormGroup>
+            <Link href="#">Forgot password?</Link>
+          </CustomBox>
+          <Button
+            fullWidth
+            variant="contained"
+            type="button"
+            onClick={handleSubmit}
+            sx={{padding: '0.7rem'}}
+          >
+            Login
+          </Button>
+        </CustomStack>
+      </CustomPaper>
+    </CustomForm>
+  );
 }
 
-export default LoginForm
+export default LoginForm;
