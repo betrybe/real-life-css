@@ -3,7 +3,10 @@ import LoginForm from './components/LoginForm';
 
 function App() {
   return (
-    <LoginForm />
+    <>
+      <h1 className='bg-green-500'>Olá tailwind</h1>
+      <LoginForm />
+    </>
   );
 }
 
