@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 function LoginForm() {
   const [email, setEmail] = useState({
@@ -26,7 +26,7 @@ function LoginForm() {
       return false;
     }
     return true;
-  }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -58,53 +58,59 @@ function LoginForm() {
   };
 
   return (
-    <form>
-      <h1>Sign In</h1>
-      <fieldset>
-        <input
-          type="email"
-          name='email'
-          placeholder="Login"
-          value={email.value}
-          onChange={handleChange}
-        />
-        <br />
-        {email.wasTouched && email.hasError && <small>{email.error}</small>}
-      </fieldset>
-      <fieldset>
-        <input
-          type={showPassword ? 'text' : 'password'}
-          placeholder="Password"
-          value={password.value}
-          name='password'
-          onChange={handleChange}
-        />
-        <input
-          type="checkbox"
-          checked={showPassword}
-          onChange={() => setShowPassword(!showPassword)}
-        />
-        <br />
-        {password.wasTouched && password.hasError && <small>{password.error}</small>}
-      </fieldset>
-      <fieldset>
-        <label htmlFor="remember">
+    <div className='bg-stone-200 min-h-screen flex items-center justify-center'>
+      <form className='bg-white px-16 py-12 rounded-2xl shadow-lg text-center'>
+        <h1 className='text-6xl mb-10'>Sign In</h1>
+        <fieldset className='text-left mb-4'>
+          <input
+            type="email"
+            name="email"
+            placeholder="Login"
+            value={email.value}
+            onChange={handleChange}
+            className="w-full block bg-black rounded p-2 text-white"
+          />
+          {email.wasTouched && email.hasError && <small className='font-normal text-red-400 '>{email.error}</small>}
+        </fieldset>
+        <fieldset className='text-left mb-4'>
+          <input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Password"
+            value={password.value}
+            name="password"
+            onChange={handleChange}
+            className="w-full block bg-black rounded p-2 text-white"
+
+          />
           <input
             type="checkbox"
-            name="remember"
-            id="remember"
-            checked={remember}
-            onChange={(e) => setRemember(e.target.checked)}
+            checked={showPassword}
+            onChange={() => setShowPassword(!showPassword)}
           />
-          Remember me{' '}
-        </label>
-        <a href="#">Forgot password?</a>
-      </fieldset>
-      <button type="button" onClick={handleSubmit}>
-        Login
-      </button>
-    </form>
-  )
+          <br />
+          {password.wasTouched && password.hasError && (
+            <small className='font-normal text-red-400 '>{password.error}</small>
+          )}
+        </fieldset>
+        <fieldset>
+          <label htmlFor="remember">
+            <input
+              type="checkbox"
+              name="remember"
+              id="remember"
+              checked={remember}
+              onChange={(e) => setRemember(e.target.checked)}
+            />
+            Remember me{' '}
+          </label>
+          <a href="#" className='text-green-400'>Forgot password?</a>
+        </fieldset>
+        <button className='bg-green-400 p-3 w-full mt-4 rounded-lg shadow' type="button" onClick={handleSubmit}>
+          Login
+        </button>
+      </form>
+    </div>
+  );
 }
 
-export default LoginForm
+export default LoginForm;
