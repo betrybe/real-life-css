@@ -59,7 +59,7 @@ function LoginForm() {
 
   return (
     <div className='bg-stone-200 min-h-screen flex items-center justify-center'>
-      <form className='bg-white px-16 py-12 rounded-2xl shadow-lg text-center'>
+      <form className='bg-white px-16 py-12 rounded-2xl shadow-lg text-center w-100'>
         <h1 className='text-6xl mb-10'>Sign In</h1>
         <fieldset className='text-left mb-4'>
           <input
@@ -72,7 +72,7 @@ function LoginForm() {
           />
           {email.wasTouched && email.hasError && <small className='font-normal text-red-400 '>{email.error}</small>}
         </fieldset>
-        <fieldset className='text-left mb-4'>
+        <fieldset className='text-left mb-4 relative'>
           <input
             type={showPassword ? 'text' : 'password'}
             placeholder="Password"
@@ -86,26 +86,28 @@ function LoginForm() {
             type="checkbox"
             checked={showPassword}
             onChange={() => setShowPassword(!showPassword)}
+            className="accent-black absolute right-3 top-3"
           />
-          <br />
+
           {password.wasTouched && password.hasError && (
             <small className='font-normal text-red-400 '>{password.error}</small>
           )}
         </fieldset>
-        <fieldset>
-          <label htmlFor="remember">
+        <fieldset className='flex justify-between items-center'>
+          <label htmlFor="remember" className='text-xs flex items-center text-gray-600'>
             <input
               type="checkbox"
               name="remember"
               id="remember"
               checked={remember}
               onChange={(e) => setRemember(e.target.checked)}
+              className="mr-1 accent-black"
             />
             Remember me{' '}
           </label>
-          <a href="#" className='text-green-400'>Forgot password?</a>
+          <a href="#" className='text-green-400 text-xs'>Forgot password?</a>
         </fieldset>
-        <button className='bg-green-400 p-3 w-full mt-4 rounded-lg shadow' type="button" onClick={handleSubmit}>
+        <button className='bg-green-400 p-3 w-full mt-4 rounded-lg shadow hover:bg-green-600 hover:text-white' type="button" onClick={handleSubmit}>
           Login
         </button>
       </form>

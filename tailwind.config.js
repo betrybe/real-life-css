@@ -7,7 +7,11 @@ module.exports = {
     fontFamily: {
       'sans': 'Lexend Deca, sans-serif'
     },
-    extend: {},
+    extend: {
+      spacing: {
+        '100': '25rem'
+      }
+    },
   },
   plugins: [],
 }
